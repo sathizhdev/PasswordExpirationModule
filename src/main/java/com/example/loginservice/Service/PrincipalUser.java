@@ -1,56 +1,59 @@
 package com.example.loginservice.Service;
 
-import com.example.loginservice.Modal.Role;
+
+import com.example.loginservice.Modal.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
-public class PrincipalUser implements UserDetails {
+public class PrincipalUser extends User implements UserDetails {
 
 
-    private String userName;
+    final private User user;
 
-    private String password;
-
-    private LocalDateTime passwordChangedTime;
-
-    private Role role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public PrincipalUser(User user) {
+        this.user = user;
     }
 
     @Override
-    public String getPassword() {
-        return null;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+
+        return authorities;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.user.getUserName();
+    }
+
+    @Override
+    public String getPassword() {
+        return this.user.getPassword();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

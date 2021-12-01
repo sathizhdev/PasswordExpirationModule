@@ -29,6 +29,11 @@
         <div align="center" th:if="${param.error}">
             <p style="font-size:large; color: #FF1C19;">Email or Password invalid, please verify</p>
         </div>
+
+        <div align="center" th:if="${param.expired}">
+            <p style="font-size:large; color: #FF1C19;">Password Expired Click to Change</p>
+        </div>
+
         <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
     </form>
 </div>

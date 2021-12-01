@@ -23,6 +23,7 @@ public class User {
             = 90;
 
 
+
     @Id
     @Column
     @NotNull
@@ -51,6 +52,16 @@ public class User {
                 ", role=" + role +
                 '}';
     }
+
+    public User() {}
+
+    public User(User user) {
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.passwordChangedTime = user.getPasswordChangedTime();
+        this.role = user.getRole();
+    }
+
 
     public boolean isPasswordExpired() {
         if (this.passwordChangedTime == null) return false;
