@@ -1,0 +1,5 @@
+package com.example.loginservice.Modal;
+
+public enum Role {
+    ROLE_USER, ROLE_ADMIN
+}
