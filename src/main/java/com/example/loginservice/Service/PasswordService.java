@@ -15,12 +15,18 @@ public class PasswordService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+
+
     public void changePassword(User user, String newPassword) {
         String encodedPassword = passwordEncoder.encode(newPassword);
-       user.setPassword(encodedPassword);
+        user.setPassword(encodedPassword);
 
         user.setPasswordChangedTime(LocalDateTime.now());
 
         usersRepository.save(user);
     }
+
+
+
+
 }

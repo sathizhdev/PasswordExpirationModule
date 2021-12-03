@@ -12,10 +12,15 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImpl implements UserDetailsService  {
+
+    User user;
 
     @Autowired
      usersRepository userRepository;
@@ -34,11 +39,21 @@ public class UserServiceImpl implements UserDetailsService  {
    }
 
 
+    public void changePassword( String newPassword) {
+
+        user.setPassword(newPassword);
+
+        user.setPasswordChangedTime(LocalDateTime.now());
+
+        userRepository.save(user);
+    }
+
+
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-       User user = userRepository.findByUserName(userName);
+       user = userRepository.findByUserName(userName);
 
        logger.info(String.valueOf(user));
 
@@ -51,7 +66,7 @@ public class UserServiceImpl implements UserDetailsService  {
             String message = user.getUserName() + " Your Password Expired";
 
             logger.info("Password Expired");
-            
+
             // Message to Expiry Queue
             amqpTemplate.convertAndSend(MessageConfig.topicExchangeName, "demo.test", message);
 

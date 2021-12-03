@@ -31,7 +31,11 @@
         </div>
 
         <div align="center" th:if="${param.expired}">
-            <p style="font-size:large; color: #FF1C19;">Password Expired Click to Change</p>
+            <div class="alert alert-warning" role="alert">
+               Your Password Expired
+            </div>
+            <a href="/resetPassword"> <button type="button" class="btn btn-link">Click to Change Password</button>
+            </a>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>

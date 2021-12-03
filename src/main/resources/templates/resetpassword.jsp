@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Login</title>
+    <title>Reset Your Password</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,11 +12,11 @@
 
 <body>
 
-<div>
+<div style="align-content: center" >
     <h2>Change Your Expired Password</h2>
 </div>
 
-<form th:action="@{/change_password}" method="post" style="max-width: 350px; margin: 0 auto;">
+<form th:action="@{/changePassword}" method="POST" style="max-width: 350px; margin: 0 auto;">
     <div class="border border-secondary rounded p-3">
         <div>
             <p>
