@@ -31,6 +31,9 @@
                 <input type="password" class="form-control" placeholder="Confirm new password"
                        required oninput="checkPasswordMatch(this);" />
             </p>
+            <div class="alert alert-warning" role="alert" th:if="${param.error}">
+               Invalid
+            </div>
             <p class="text-center">
                 <input type="submit" value="Change Password" class="btn btn-primary" />
             </p>

@@ -39,13 +39,23 @@ public class UserServiceImpl implements UserDetailsService  {
    }
 
 
-    public void changePassword( String newPassword) {
+    public String changePassword( String newPassword,String oldPassword) {
 
-        user.setPassword(newPassword);
+       if(user.getPassword().equals(oldPassword)) {
+           user.setPassword(newPassword);
 
-        user.setPasswordChangedTime(LocalDateTime.now());
+           user.setPasswordChangedTime(LocalDateTime.now());
 
-        userRepository.save(user);
+           logger.info("Password Changed");
+
+           userRepository.save(user);
+
+           return "passwordchanged";
+       }
+
+       return "invalidpassword";
+
+
     }
 
 

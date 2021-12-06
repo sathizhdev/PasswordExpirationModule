@@ -41,18 +41,25 @@ public class userController {
     }
 
     @RequestMapping("/changePassword")
-    public ModelAndView changePassword(@RequestParam String newPassword)
+    public ModelAndView changePassword(@RequestParam String newPassword,@RequestParam String oldPassword)
     {
 
-        System.out.println("Inside Change Pass Endpoint");
         ModelAndView mv = new ModelAndView();
 
-        mv.setViewName("Welcome");
+        String result = userservice.changePassword(newPassword,oldPassword);
 
-        userservice.changePassword(newPassword);
+        System.out.println(result);
+        if(result.equals("invalidpassword"))
+        {
+
+            mv.setViewName("redirect:/resetPassword?error=true");
+
+            return mv;
+        }
+
+        mv.setViewName("redirect:/login");
 
         return mv;
-
 
     }
 
