@@ -38,6 +38,9 @@
             </a>
         </div>
 
+        <div class="alert alert-success" role="alert" th:if="${param.changed}">
+            Your Password Changed Successfully!
+        </div>
         <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
     </form>
 </div>

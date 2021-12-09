@@ -57,7 +57,7 @@ public class userController {
             return mv;
         }
 
-        mv.setViewName("redirect:/login");
+        mv.setViewName("redirect:/login?changed=true");
 
         return mv;
 
