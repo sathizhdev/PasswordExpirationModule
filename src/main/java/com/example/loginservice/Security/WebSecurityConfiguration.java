@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -32,13 +33,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationFailureHandler failureHandler;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Bean
     public AuthenticationProvider authProvider()
     {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
         provider.setUserDetailsService(userDetailService);
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        provider.setPasswordEncoder(passwordEncoder);
 
         return provider;
     }
@@ -53,11 +57,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/resetPassword").permitAll()
                 .antMatchers("/changePassword").permitAll()
+                .antMatchers("/welcome").permitAll()
+                .antMatchers("/register").permitAll()
                 .anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                  .loginPage("/login") //.failureUrl("/login?error=true")
                 .failureHandler(failureHandler)
-                .defaultSuccessUrl("/Welcome")
+                //.successHandler(customSuccessHandler)
+                 .defaultSuccessUrl("/Welcome")
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .and().logout()

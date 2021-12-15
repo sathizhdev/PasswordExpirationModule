@@ -22,8 +22,6 @@ public class User {
     private static final long PASSWORD_EXPIRATION_TIME
             = 90;
 
-
-
     @Id
     @Column
     @NotNull
